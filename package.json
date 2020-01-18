@@ -1,0 +1,26 @@
+{
+  "name": "plants_can_feel",
+  "version": "1.0.0",
+  "description": "Plants can feel too, dont be a monster.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AllWKA/PlantsCanFeel.git"
+  },
+  "author": "Allwka",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AllWKA/PlantsCanFeel/issues"
+  },
+  "homepage": "https://github.com/AllWKA/PlantsCanFeel#readme",
+  "dependencies": {
+    "serialport": "^8.0.6"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
+}
