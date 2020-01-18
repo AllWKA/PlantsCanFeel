@@ -18,9 +18,11 @@
   },
   "homepage": "https://github.com/AllWKA/PlantsCanFeel#readme",
   "dependencies": {
+    "node-telegram-bot-api": "^0.40.0",
     "serialport": "^8.0.6"
   },
   "devDependencies": {
+    "dotenv": "^8.2.0",
     "nodemon": "^2.0.2"
   }
 }
