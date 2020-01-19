@@ -1,35 +1,14 @@
-const SerialPort = require('serialport');
-const TelegramBot = require('node-telegram-bot-api');
+const TelegramBot = require('./classes/TelegramBotClass');
+const Arduino = require('./classes/ArduinoClass');
 
-const ArduinoBotService = require('./ArduinoBotService')
+TelegramBot.init();
+Arduino.init();
 
-const dotenv = require('dotenv');
-dotenv.config();
-
-const telegramBot = new TelegramBot(process.env.TELEGRAM_BOT_KEY, { polling: true })
-ArduinoBotService.setBot(telegramBot);
-
-const ReadLine = SerialPort.parsers.Readline;
+//Wire both services
+TelegramBot.onMyPlantsEvent(Arduino);
+Arduino.onData(TelegramBot);
+Arduino.onError(TelegramBot);
 
 
-telegramBot.onText(/\/myplant/, (msg, match) => {
-    ArduinoBotService.sendMessage(ArduinoBotService.getHumidity() + "%")
-});
 
-telegramBot.onText(/\/start/, (msg, match) => {
-    ArduinoBotService.setChatId(msg.chat.id);
-});
 
-const port = new SerialPort('COM3', {
-    baudRate: 9600
-});
-
-const parser = port.pipe(new ReadLine({ delimeter: '\r\n' }));
-
-parser.on('data', (data) => {
-    ArduinoBotService.setHumidity((100 - (data * 100 / 1023)));
-});
-
-parser.on('error', (error) => {
-    console.log(error);
-});
